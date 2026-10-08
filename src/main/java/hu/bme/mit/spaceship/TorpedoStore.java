@@ -14,6 +14,7 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
+  // generator so we need not seed it many times over
   private Random generator = new Random();
 
   public TorpedoStore(int numberOfTorpedos){
@@ -31,6 +32,7 @@ public class TorpedoStore {
   }
 
   public boolean fire(int numberOfTorpedos){
+    // kill off method if argument is incorrect
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
       throw new IllegalArgumentException("numberOfTorpedos");
     }
@@ -42,6 +44,7 @@ public class TorpedoStore {
 
     if (r >= FAILURE_RATE) {
       // successful firing
+      // decrease number of available rockets
       this.torpedoCount -= numberOfTorpedos;
       success = true;
     } else {
